@@ -18,8 +18,6 @@ class AutoTTLExtension extends Minz_Extension
 
     public function init()
     {
-        $this->statsDAO = FreshRSS_Factory::createStatsDAO();
-        $this->feedDAO = FreshRSS_Factory::createFeedDao();
         $this->registerHook('feed_before_actualize', array($this, 'feedBeforeActualizeHook'));
 
         if (is_null(FreshRSS_Context::$system_conf->auto_ttl_max_ttl)) {
@@ -43,6 +41,9 @@ class AutoTTLExtension extends Minz_Extension
         if ($feed->lastUpdate() === 0) {
             return $feed;
         }
+
+        $this->statsDAO = FreshRSS_Factory::createStatsDAO();
+        $this->feedDAO = FreshRSS_Factory::createFeedDao();
 
         $now = time();
         $maxTTL = (int)FreshRSS_Context::$system_conf->auto_ttl_max_ttl;
