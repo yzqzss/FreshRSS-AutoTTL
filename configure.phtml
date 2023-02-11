@@ -39,7 +39,7 @@
 				) {
 				    echo '<option value="' .
 				        $v .
-				        ((int)FreshRSS_Context::$user_conf->auto_ttl_max_ttl === $v ? '" selected="selected' : '') .
+				        ((int)FreshRSS_Context::$system_conf->auto_ttl_max_ttl === $v ? '" selected="selected' : '') .
 				        '">' .
 				        $t .
 				        '</option>';
