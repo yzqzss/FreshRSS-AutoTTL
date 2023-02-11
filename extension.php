@@ -22,9 +22,9 @@ class AutoTTLExtension extends Minz_Extension
         $this->feedDAO = FreshRSS_Factory::createFeedDao();
         $this->registerHook('feed_before_actualize', array($this, 'feedBeforeActualizeHook'));
 
-        if (is_null(FreshRSS_Context::$user_conf->auto_ttl_max_ttl)) {
-            FreshRSS_Context::$user_conf->auto_ttl_max_ttl = self::MAX_TTL;
-            FreshRSS_Context::$user_conf->save();
+        if (is_null(FreshRSS_Context::$system_conf->auto_ttl_max_ttl)) {
+            FreshRSS_Context::$system_conf->auto_ttl_max_ttl = self::MAX_TTL;
+            FreshRSS_Context::$system_conf->save();
         }
     }
 
@@ -33,8 +33,8 @@ class AutoTTLExtension extends Minz_Extension
         $this->registerTranslates();
 
         if (Minz_Request::isPost()) {
-            FreshRSS_Context::$user_conf->auto_ttl_max_ttl = (int)Minz_Request::param('auto_ttl_max_ttl', self::MAX_TTL);
-            FreshRSS_Context::$user_conf->save();
+            FreshRSS_Context::$system_conf->auto_ttl_max_ttl = (int)Minz_Request::param('auto_ttl_max_ttl', self::MAX_TTL);
+            FreshRSS_Context::$system_conf->save();
         }
     }
 
@@ -45,7 +45,7 @@ class AutoTTLExtension extends Minz_Extension
         }
 
         $now = time();
-        $maxTTL = (int)FreshRSS_Context::$user_conf->auto_ttl_max_ttl;
+        $maxTTL = (int)FreshRSS_Context::$system_conf->auto_ttl_max_ttl;
         $count = $this->feedDAO->countEntries($feed->id());
 
         if ($count < 2) {
