@@ -44,9 +44,9 @@ class AutoTTLExtension extends Minz_Extension
 
         FreshRSS_Context::systemConf()->save();
 
-        $this->defaultTTL = FreshRSS_Context::systemConf()->attributeInt('ttl_default');
-        $this->maxTTL = FreshRSS_Context::systemConf()->attributeInt('auto_ttl_max_ttl');
-        $this->statsCount = FreshRSS_Context::systemConf()->attributeInt('auto_ttl_stats_count');
+        $this->defaultTTL = (int)FreshRSS_Context::systemConf()->param('ttl_default');
+        $this->maxTTL = (int)FreshRSS_Context::systemConf()->param('auto_ttl_max_ttl');
+        $this->statsCount = (int)FreshRSS_Context::systemConf()->param('auto_ttl_stats_count');
     }
 
     /*
